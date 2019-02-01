@@ -1,0 +1,97 @@
+<nav aria-label="breadcrumb" role="navigation">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Bookings </li>
+    </ol>
+  </nav>
+<div class="col-lg-3">
+  <button type="button" class="btn btn-danger" (click)="createBooking();"><i class="mdi mdi-upload"></i>Add New Booking</button>
+</div>
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Reservation Bookings</h4>
+        <p class="card-description">
+          Entails total listing of all reservations.
+          
+        </p>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>
+                  User
+                </th>
+                <th>
+                  Booking name
+                </th>
+                <th>
+                  Booking Date
+                </th>
+                <th>
+                  Booking Time
+                </th>
+                <th>
+                  Booking Status
+                </th>
+                <th>
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+            
+              <tr *ngFor="let booking of bookings | paginate: { itemsPerPage: 25, currentPage: page }; let i=index;">
+                <td class="py-1">
+                  <img src="assets/images/faces-clipart/pic-1.png" alt="image" />
+                </td>
+                <td>
+                  {{booking.booking_name}}
+                </td>
+                <td>
+                  {{booking.booking_date}}
+                </td>
+                <td>
+                  {{booking.booking_time}}
+                </td>
+                <td>
+                  <label class="badge badge-success">{{booking.booking_status}}</label>
+                </td>
+                <td>
+                  <!-- <div><i class="fa fa-edit" placement="right" ngbTooltip="edit" (click)="edit(booking);"></i></div> -->
+                  <div><i class="fa fa-trash-o" placement="right" ngbTooltip="cancel" (click)="attemptDelete(content,booking);"></i></div>
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+          <pagination-controls (pageChange)="page = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Cancel Booking ?</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <!-- <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="dateOfBirth">Date of birth</label>
+          <div class="input-group">
+            <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div> -->
+    <div class="modal-footer">
+      <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">No</button> -->
+      <button type="button" class="btn btn-outline-dark" (click)="delete()">Yes</button>
+    </div>
+  </ng-template>

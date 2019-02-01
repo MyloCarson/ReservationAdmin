@@ -1,0 +1,41 @@
+<nav aria-label="breadcrumb" role="navigation">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+      <li class="breadcrumb-item"><a href="/admin/users">Users</a></li>
+      <li class="breadcrumb-item active" aria-current="page">New user</li>
+    </ol>
+  </nav>
+<div class="col-md-6 col-md-offset-3 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">New User form</h4>
+        <p class="card-description">
+          Fill all fields
+        </p>
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit();" class="forms-sample">
+          <div class="form-group">
+            <label for="exampleInputName1">Username</label>
+            <input type="text" class="form-control" id="exampleInputName1" placeholder="username" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+              <div *ngIf="f.username.errors.required">username is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail3">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail3" placeholder="someone@example.com" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">email is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword4">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword4" placeholder="Password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+              <div *ngIf="f.password.errors.required">password is required</div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success mr-2">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>

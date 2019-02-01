@@ -1,0 +1,86 @@
+<nav aria-label="breadcrumb" role="navigation">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Users</li>
+    </ol>
+  </nav>
+<div class="col-lg-3">
+  <button type="button" class="btn btn-danger" (click)="goToCreateUser();"><i class="mdi mdi-upload"></i>Add New User</button>
+</div>
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Users</h4>
+        <p class="card-description">
+          Entails total listing of all users.
+        </p>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>
+                  #
+                </th>
+                <th>
+                  Email
+                </th>
+                <th>
+                  Username
+                </th>
+                <th>
+                  Date Joined
+                </th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users | paginate: { itemsPerPage: 25, currentPage: page }; let i=index;">
+                <td>
+                  {{i+1}}
+                </td>
+                <td>
+                  {{user.email}}
+                </td>
+                <td>
+                  {{user.username}}
+                </td>
+                <td>
+                  {{user.created_at}}
+                </td>
+                <td>
+                  <!-- <div><i class="fa fa-edit" placement="right" ngbTooltip="edit" (click)="edit(user);"></i></div> -->
+                  <div><i class="fa fa-trash-o" placement="right" ngbTooltip="delete" (click)="attemptDelete(content,user);"></i></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <pagination-controls (pageChange)="page = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Delete user ?</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <!-- <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="dateOfBirth">Date of birth</label>
+        <div class="input-group">
+          <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div> -->
+  <div class="modal-footer">
+    <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">No</button> -->
+    <button type="button" class="btn btn-outline-dark" (click)="delete()">Yes</button>
+  </div>
+</ng-template>

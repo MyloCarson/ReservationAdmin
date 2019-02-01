@@ -1,0 +1,44 @@
+<nav aria-label="breadcrumb" role="navigation">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+      <li class="breadcrumb-item"><a href="/admin/reservation-tables">Reservation Table</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Data</li>
+    </ol>
+  </nav>
+<div class="col-md-6 col-md-offset-3 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title"> New table form</h4>
+        <p class="card-description">
+        Fill all fields
+        </p>
+        <form [formGroup]="tableForm" (ngSubmit)="onSubmit();" class="forms-sample">
+          <div class="form-group">
+            <label for="exampleInputName1">Table Name</label>
+            <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+              <div *ngIf="f.name.errors.required">Table name is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleTextarea1">Description</label>
+            <textarea class="form-control" id="exampleTextarea1" rows="2" formControlName="description" [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
+            <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+              <div *ngIf="f.description.errors.required">Description is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+          <label for="exampleSelectPrimary">Is this table available ?</label>
+          <select class="form-control border-primary" id="exampleSelectPrimary" formControlName="availability" [ngClass]="{ 'is-invalid': submitted && f.availability.errors }">
+            <option>true</option>
+            <option>false</option>
+          </select>
+          <div *ngIf="submitted && f.availability.errors" class="invalid-feedback">
+            <div *ngIf="f.availability.errors.required">Availability is required</div>
+          </div>
+        </div>
+          <button type="submit" class="btn btn-success mr-2">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>

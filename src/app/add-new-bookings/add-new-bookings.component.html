@@ -1,0 +1,50 @@
+<nav aria-label="breadcrumb" role="navigation">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+      <li class="breadcrumb-item"><a href="/admin/bookings">Bookings</a></li>
+      <li class="breadcrumb-item active" aria-current="page">New booking</li>
+    </ol>
+  </nav>
+<div class="col-md-6 col-md-offset-3 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">New Booking form</h4>
+        <p class="card-description">
+          Fill all fields
+        </p>
+        <form [formGroup]="bookingForm" (ngSubmit)="onSubmit();" class="forms-sample">
+          <div class="form-group">
+            <label for="exampleInputName1">Booking Name</label>
+            <input type="text" class="form-control" id="exampleInputName1" placeholder="John Doe" formControlName="booking_name" [ngClass]="{ 'is-invalid': submitted && f.booking_name.errors }">
+            <div *ngIf="submitted && f.booking_name.errors" class="invalid-feedback">
+              <div *ngIf="f.booking_name.errors.required">Booking name is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail3">Booking Date </label>
+            <input type="date" class="form-control" id="exampleInputEmail3" placeholder="dd-mm-yyyy" formControlName="booking_date" [ngClass]="{ 'is-invalid': submitted && f.booking_date.errors }">
+            <div *ngIf="submitted && f.booking_date.errors" class="invalid-feedback">
+              <div *ngIf="f.booking_date.errors.required">Booking name is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword4">Booking Time</label>
+            <input type="time" class="form-control" id="exampleInputPassword4" placeholder="10:20" formControlName="booking_time" [ngClass]="{ 'is-invalid': submitted && f.booking_time.errors }">
+            <div *ngIf="submitted && f.booking_time.errors" class="invalid-feedback">
+              <div *ngIf="f.booking_time.errors.required">Booking time is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+          <label for="exampleSelectPrimary">Table</label>
+          <select formControlName="tableControl"  class="form-control border-primary" id="exampleSelectPrimary" [ngClass]="{ 'is-invalid': submitted && f.tableControl.errors }">
+            <option [value]="table" *ngFor="let table of tables;" >{{table.name}}</option>
+          </select>
+          <div *ngIf="submitted && f.tableControl.errors" class="invalid-feedback">
+            <div *ngIf="f.tableControl.errors.required">Table is required</div>
+          </div>
+        </div>
+          <button type="submit" class="btn btn-success mr-2">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,25 @@
+.loading{
+    animation-name : loading;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+    animation-direction: normal;
+    color: red;
+    height: 20px;
+    width: 70px;
+    // left: 0%;
+}
+
+@keyframes loading {
+    0% {
+        left: 0%;
+
+    }
+
+    50% {
+        left: 40%;
+    }
+
+    100% {
+        left: 90%
+    }
+}
